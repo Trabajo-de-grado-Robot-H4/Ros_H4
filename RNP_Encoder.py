@@ -16,7 +16,7 @@ flag = 0
 Last_RoB_Status = 0.0
 Current_RoB_Status = 0.0
 grados=0.0
-Enc=Pose() # Tipo de dato pose
+
 """ funcion setup """
 def setup():
 
@@ -61,7 +61,7 @@ def talker():
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         
-        
+        Enc=Pose() # Tipo de dato pose
         sensor=rotaryDeal()
         Enc.position.x=sensor
         rospy.loginfo(Enc.position.x)
