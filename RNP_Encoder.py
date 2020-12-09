@@ -63,8 +63,8 @@ def talker():
         
         sensor=rotaryDeal()
         Enc.position.x=sensor
-        Enc.position.x=3
-        Enc.position.z=12
+        #Enc.position.y=3
+        #Enc.position.z=12
         rospy.loginfo(Enc)
         pub.publish(Enc)
         rate.sleep()
