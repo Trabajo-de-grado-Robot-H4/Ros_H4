@@ -24,7 +24,6 @@ def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN) # input mode
     GPIO.setup(RoBPin, GPIO.IN)
-    GPIO.setup(RoSPin,GPIO.IN,pull_up_down=GPIO.PUD_UP)
     rotaryClear()
 """ funcion que lee el encoder """
 def rotaryDeal():
