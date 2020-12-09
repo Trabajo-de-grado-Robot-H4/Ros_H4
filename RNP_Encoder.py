@@ -65,8 +65,8 @@ def talker():
         Enc.position.x=sensor
         #Enc.position.y=3
         #Enc.position.z=12
-        rospy.loginfo(Enc.position)
-        pub.publish(Enc.position)
+        rospy.loginfo(Enc)
+        pub.publish(Enc)
         rate.sleep()
 
 if __name__ == '__main__':
