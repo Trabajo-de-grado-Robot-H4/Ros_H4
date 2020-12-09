@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# license removed for brevity
 """ importar librerias necesarias """
 import rospy
 from geometry_msgs.msg import Pose # importamos el tipo de dato pose
