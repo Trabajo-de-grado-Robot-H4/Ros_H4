@@ -20,11 +20,10 @@ grados=0.0
 
 """ funcion setup """
 def setup():
-
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN) # input mode
     GPIO.setup(RoBPin, GPIO.IN)
-    rotaryClear()
+    
 """ funcion que lee el encoder """
 def rotaryDeal():
  global flag
