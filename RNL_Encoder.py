@@ -3,7 +3,8 @@ import rospy
 from geometry_msgs.msg import Pose
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    variable_x = data.position.x
+    rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
     
 def listener():
 
