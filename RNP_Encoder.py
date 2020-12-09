@@ -2,10 +2,11 @@
 
 """ importar librerias necesarias """
 import rospy
+from geometry_msgs.msg import Pose # importamos el tipo de dato pose
 import RPi.GPIO as GPIO # libreria para comunicacion de puestos GPIO de la raspberry
 import time             # libreria para obtener el tiempo
+Enc=Pose() # Tipo de dato pose
 
-from geometry_msgs.msg import Pose # importamos el tipo de dato pose
 """ pines usados en la rapsberry"""
 RoAPin = 20    
 RoBPin = 21   
@@ -56,12 +57,12 @@ def destroy():
         GPIO.cleanup()
 """ funcion que publica los datos del encoder """
 def talker():
-    pub = rospy.Publisher('Encoder', Pose, queue_size=10)
+    pub = rospy.Publisher('Chatter', Pose, queue_size=10)
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         
-        Enc=Pose() # Tipo de dato pose
+        
         sensor=rotaryDeal()
         Enc.position.x=sensor
         rospy.loginfo(Enc.position.x)
