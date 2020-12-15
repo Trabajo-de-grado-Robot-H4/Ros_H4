@@ -27,9 +27,8 @@ def talker():
         rate.sleep()
 
 if __name__ == '__main__':
-    setup()
+    
     try:
         talker()
     except rospy.ROSInterruptException:
-        destroy()
         pass
