@@ -25,6 +25,10 @@ def callback(data):
     p = GPIO.PWM(MotorE1, 50)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
     p.start(0)  #Inicializamos el objeto PWM
     
+    GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2  
+    GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+    p.ChangeDutyCycle(variable_x)
+    
 def listener():
 
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -32,9 +36,9 @@ def listener():
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
-    rospy.init_node('listener', anonymous=True)
+    rospy.init_node('Listenermotor', anonymous=True)
 
-    rospy.Subscriber("Encoder", Pose, callback)
+    rospy.Subscriber("Datosmotor", Pose, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
