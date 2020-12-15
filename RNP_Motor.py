@@ -1,10 +1,29 @@
 #!/usr/bin/env python
 import rospy
 from geometry_msgs.msg import Pose
+import RPi.GPIO as GPIO
+import time
 
+
+"""Pines usados """
+MotorIN1 = 15
+MotorIN2 = 14
+MotorE1 = 18
+
+def setup():
+
+    GPIO.setmode(GPIO.BCM)
+    """ Setup del motor """
+    GPIO.setup(MotorIN1,GPIO.OUT)
+    GPIO.setup(MotorIN2,GPIO.OUT)
+    GPIO.setup(MotorE1,GPIO.OUT)
+
+
+"""inicio del programa """
 def callback(data):
     variable_x = data.position.x
-    rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
+    p = GPIO.PWM(MotorE1, 50)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
+    p.start(0)  #Inicializamos el objeto PWM
     
 def listener():
 
