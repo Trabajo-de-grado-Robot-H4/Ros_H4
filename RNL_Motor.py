@@ -28,6 +28,7 @@ def callback(data):
     GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2  
     GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
     p.ChangeDutyCycle(variable_x)
+    rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
     
 def listener():
 
