@@ -44,7 +44,7 @@ def listener():
     rospy.spin()
 
 if __name__ == '__main__':
-    setup():
+    setup()
         try:
             listener()
     except rospy.ROSInterruptException:
