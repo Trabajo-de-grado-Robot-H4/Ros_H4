@@ -45,7 +45,7 @@ def listener():
 
 if __name__ == '__main__':
     setup()
-        try:
+    try:
             listener()
     except rospy.ROSInterruptException:
             pass
