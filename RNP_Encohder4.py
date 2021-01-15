@@ -44,29 +44,82 @@ def setup():
     GPIO.setup(RoBPin4, GPIO.IN)
 """ funcion que lee el encoder """
 def rotaryDeal():
- global flag
- global Last_RoB_Status
- global Current_RoB_Status
- global globalCounter
+ global flag1,flag2,flag3,flag4
+ global Last_RoB_Status1,Last_RoB_Status2,Last_RoB_Status3,Last_RoB_Status4 
+ global Current_RoB_Status1,Current_RoB_Status2,Current_RoB_Status3,Current_RoB_Status4
+ global globalCounter1,globalCounter2,globalCounter3,globalCounter4
+ global grados1, grados2, grados3, grados4
  global gain
  global grados
-
- Last_RoB_Status = GPIO.input(RoBPin)
- while((not GPIO.input(RoAPin1)) and (not GPIO.input(RoAPin2)) and (not GPIO.input(RoAPin3)) and (not GPIO.input(RoAPin4))  ):
-   Current_RoB_Status = GPIO.input(RoBPin)
-   flag = 1
  
- if flag == 1:
-      flag = 0
-      if (Last_RoB_Status == 0) and (Current_RoB_Status == 1):
-         globalCounter = globalCounter + 1.0
+
+ Last_RoB_Status1 = GPIO.input(RoBPin1)
+ Last_RoB_Status2 = GPIO.input(RoBPin2)
+ Last_RoB_Status3 = GPIO.input(RoBPin3)
+ Last_RoB_Status4 = GPIO.input(RoBPin4)
+    
+ while((not GPIO.input(RoAPin1)) and (not GPIO.input(RoAPin2)) and (not GPIO.input(RoAPin3)) and (not GPIO.input(RoAPin4))  ):
+   Current_RoB_Status1 = GPIO.input(RoBPin1)
+   flag1 = 1
+ 
+ if flag1 == 1:
+      flag1 = 0
+      if (Last_RoB_Status1 == 0) and (Current_RoB_Status1 == 1):
+         globalCounter1 = globalCounter1 + 1.0
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
-      if (Last_RoB_Status == 1) and (Current_RoB_Status == 0):
-         globalCounter = globalCounter - 1.0
+      if (Last_RoB_Status1 == 1) and (Current_RoB_Status1 == 0):
+         globalCounter1 = globalCounter1 - 1.0
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
- grados=globalCounter*gain
+ grados1=globalCounter1*gain
+"""enconder 2 """"
+   Current_RoB_Status2 = GPIO.input(RoBPin2)
+   flag2 = 1
+ 
+ if flag2 == 1:
+      flag2 = 0
+      if (Last_RoB_Status2 == 0) and (Current_RoB_Status2 == 1):
+         globalCounter2 = globalCounter2 + 1.0
+         #print ('globalCounter =')
+         #print ("{0:.3f}".format(globalCounter*gain))
+      if (Last_RoB_Status2 == 1) and (Current_RoB_Status2 == 0):
+         globalCounter2 = globalCounter2 - 1.0
+         #print ('globalCounter =')
+         #print ("{0:.3f}".format(globalCounter*gain))
+ grados2=globalCounter2*gain
+""""encoder 3""""
+   Current_RoB_Status3 = GPIO.input(RoBPin3)
+   flag3 = 1
+ 
+ if flag3 == 1:
+      flag3 = 0
+      if (Last_RoB_Status3 == 0) and (Current_RoB_Status3 == 1):
+         globalCounter3 = globalCounter3 + 1.0
+         #print ('globalCounter =')
+         #print ("{0:.3f}".format(globalCounter*gain))
+      if (Last_RoB_Status3 == 1) and (Current_RoB_Status3 == 0):
+         globalCounter3 = globalCounter3 - 1.0
+         #print ('globalCounter =')
+         #print ("{0:.3f}".format(globalCounter*gain))
+ grados3=globalCounter3*gain
+""" encoder 4 """"
+  Current_RoB_Status4 = GPIO.input(RoBPin4)
+   flag4 = 1
+ 
+ if flag4 == 1:
+      flag4 = 0
+      if (Last_RoB_Status4 == 0) and (Current_RoB_Status4 == 1):
+         globalCounter4 = globalCounter4 + 1.0
+         #print ('globalCounter =')
+         #print ("{0:.3f}".format(globalCounter*gain))
+      if (Last_RoB_Status4 == 1) and (Current_RoB_Status4 == 0):
+         globalCounter4 = globalCounter4 - 1.0
+         #print ('globalCounter =')
+         #print ("{0:.3f}".format(globalCounter*gain))
+ grados4=globalCounter4*gain
+
+ grados=[grados1,grados2,grados3,grados4]
  return (grados)
 """ funcion que limpia los purtos utilizados """
 def destroy():
@@ -80,9 +133,10 @@ def talker():
         
         
         sensor=rotaryDeal()
-        Enc.position.x=sensor
-        #Enc.position.y=3
-        #Enc.position.z=12
+        Enc.position.x=sensor[0]
+        Enc.position.y=sensor[1]
+        Enc.position.z=sensor[2]
+        Enc.orientation.x=sensor[3]
         #rospy.loginfo(Enc)
         pub.publish(Enc)
         rate.sleep()
