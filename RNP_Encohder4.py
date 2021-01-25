@@ -90,11 +90,7 @@ def rotaryDeal():
          globalCounter2 = globalCounter2 - 1.0
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
- 
-"""" encoder 3 """
-   
- 
- if flag3 == 1:
+  if flag3 == 1:
       flag3 = 0
       if (Last_RoB_Status3 == 0) and (Current_RoB_Status3 == 1):
          globalCounter3 = globalCounter3 + 1.0
@@ -104,10 +100,7 @@ def rotaryDeal():
          globalCounter3 = globalCounter3 - 1.0
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
- 
-""" encoder 4 """
- 
- if flag4 == 1:
+  if flag4 == 1:
       flag4 = 0
       if (Last_RoB_Status4 == 0) and (Current_RoB_Status4 == 1):
          globalCounter4 = globalCounter4 + 1.0
