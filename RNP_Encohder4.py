@@ -137,7 +137,7 @@ def talker():
         Enc.position.y=sensor[1]
         Enc.position.z=sensor[2]
         Enc.orientation.x=sensor[3]
-        #rospy.loginfo(Enc)
+        rospy.loginfo(Enc)
         pub.publish(Enc)
         rate.sleep()
 
