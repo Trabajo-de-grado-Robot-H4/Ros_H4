@@ -44,8 +44,8 @@ def setup():
     GPIO.setup(RoBPin4, GPIO.IN)
 """ funcion que lee el encoder """
 def rotaryDeal():
- global flag1
- global flag2
+global flag1
+global flag2
  global flag3
  global flag4
  global Last_RoB_Status1,Last_RoB_Status2,Last_RoB_Status3,Last_RoB_Status4 
