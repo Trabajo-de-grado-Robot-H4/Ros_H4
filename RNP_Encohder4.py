@@ -86,7 +86,7 @@ def rotaryDeal():
  Last_RoB_Status3 = GPIO.input(RoBPin3)
  Last_RoB_Status4 = GPIO.input(RoBPin4)
     
- while((not GPIO.input(RoAPin1)) and (not GPIO.input(RoAPin2)) and (not GPIO.input(RoAPin3))  and (not GPIO.input(RoAPin4)) ):
+ while((not GPIO.input(RoAPin1)) or (not GPIO.input(RoAPin2)) or (not GPIO.input(RoAPin3))  or (not GPIO.input(RoAPin4)) ):
    Current_RoB_Status1 = GPIO.input(RoBPin1)
    flag1 = 1
    Current_RoB_Status2 = GPIO.input(RoBPin2)
