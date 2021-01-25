@@ -80,7 +80,7 @@ def rotaryDeal():
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
  grados1=globalCounter1*gain
-  """enconder 2 """
+""" enconder 2 """
  
  
  if flag2 == 1:
@@ -94,7 +94,7 @@ def rotaryDeal():
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
  grados2=globalCounter2*gain
-""""encoder 3""""
+"""" encoder 3 """
    
  
  if flag3 == 1:
@@ -108,7 +108,7 @@ def rotaryDeal():
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
  grados3=globalCounter3*gain
-""" encoder 4 """"
+""" encoder 4 """
  
  if flag4 == 1:
       flag4 = 0
