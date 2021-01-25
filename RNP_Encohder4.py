@@ -45,7 +45,9 @@ def setup():
 """ funcion que lee el encoder """
 def rotaryDeal():
  global flag1
- global flag2,flag3,flag4
+ global flag2
+ global flag3
+ global flag4
  global Last_RoB_Status1,Last_RoB_Status2,Last_RoB_Status3,Last_RoB_Status4 
  global Current_RoB_Status1,Current_RoB_Status2,Current_RoB_Status3,Current_RoB_Status4
  global globalCounter1,globalCounter2,globalCounter3,globalCounter4
@@ -59,7 +61,7 @@ def rotaryDeal():
  Last_RoB_Status3 = GPIO.input(RoBPin3)
  Last_RoB_Status4 = GPIO.input(RoBPin4)
     
- while((not GPIO.input(RoAPin1)) and (not GPIO.input(RoAPin2)) and (not GPIO.input(RoAPin3)) and (not GPIO.input(RoAPin4))  ):
+ while((not GPIO.input(RoAPin1)) and (not GPIO.input(RoAPin2)) and (not GPIO.input(RoAPin3)) and (not GPIO.input(RoAPin4)) ):
    Current_RoB_Status1 = GPIO.input(RoBPin1)
    flag1 = 1
    Current_RoB_Status2 = GPIO.input(RoBPin2)
@@ -69,7 +71,7 @@ def rotaryDeal():
    Current_RoB_Status4 = GPIO.input(RoBPin4)
    flag4 = 1
  
- if flag2 == 1:
+ if flag1 == 1:
       flag1 = 0
       if (Last_RoB_Status1 == 0) and (Current_RoB_Status1 == 1):
          globalCounter1 = globalCounter1 + 1.0
