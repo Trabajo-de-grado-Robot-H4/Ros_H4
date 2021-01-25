@@ -22,10 +22,22 @@ RoBPin4 = 13
 """ variables """
 globalCounter1,globalCounter2,globalCounter3,globalCounter4 = 0.0
 gain=0.97593582887
-flag1,flag2,flag3,flag4 = 0,0,0,0
-Last_RoB_Status1,Last_RoB_Status2,Last_RoB_Status3,Last_RoB_Status4 = 0.0,0.0,0.0,0.0
-Current_RoB_Status1,Current_RoB_Status2,Current_RoB_Status3,Current_RoB_Status4 = 0.0,0.0,0.0,0.0
-grados1,grados2,grados3,grados4=0.0,0.0,0.0,0.0
+flag1=0
+flag2=0
+flag3=0
+flag4 = 0
+Last_RoB_Status1=0.0
+Last_RoB_Status2=0.0
+Last_RoB_Status3=0.0
+Last_RoB_Status4 = 0.0
+Current_RoB_Status1=0.0
+Current_RoB_Status2=0.0
+Current_RoB_Status3=0.0
+Current_RoB_Status4 = 0.0
+grados1=0.0
+grados2=0.0
+grados3=0.0
+grados4=0.0
 grados=[0,0,0,0]
 
 """ funcion setup """
