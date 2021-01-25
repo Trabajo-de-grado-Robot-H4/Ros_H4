@@ -80,9 +80,8 @@ def rotaryDeal():
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
  grados1=globalCounter1*gain
-"""enconder 2 """
-   Current_RoB_Status2 = GPIO.input(RoBPin2)
-   flag2 = 1
+  """enconder 2 """
+ 
  
  if flag2 == 1:
       flag2 = 0
@@ -96,8 +95,7 @@ def rotaryDeal():
          #print ("{0:.3f}".format(globalCounter*gain))
  grados2=globalCounter2*gain
 """"encoder 3""""
-   Current_RoB_Status3 = GPIO.input(RoBPin3)
-   flag3 = 1
+   
  
  if flag3 == 1:
       flag3 = 0
@@ -111,8 +109,6 @@ def rotaryDeal():
          #print ("{0:.3f}".format(globalCounter*gain))
  grados3=globalCounter3*gain
 """ encoder 4 """"
-  Current_RoB_Status4 = GPIO.input(RoBPin4)
-   flag4 = 1
  
  if flag4 == 1:
       flag4 = 0
