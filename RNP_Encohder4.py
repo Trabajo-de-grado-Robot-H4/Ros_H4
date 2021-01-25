@@ -44,7 +44,8 @@ def setup():
     GPIO.setup(RoBPin4, GPIO.IN)
 """ funcion que lee el encoder """
 def rotaryDeal():
- global flag1,flag2,flag3,flag4
+ global flag1
+ global flag2,flag3,flag4
  global Last_RoB_Status1,Last_RoB_Status2,Last_RoB_Status3,Last_RoB_Status4 
  global Current_RoB_Status1
  global Current_RoB_Status2,Current_RoB_Status3,Current_RoB_Status4
@@ -79,8 +80,6 @@ def rotaryDeal():
          globalCounter1 = globalCounter1 - 1.0
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
-
-""" enconder 2 """
  if flag2 == 1:
       flag2 = 0
       if (Last_RoB_Status2 == 0) and (Current_RoB_Status2 == 1):
