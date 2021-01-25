@@ -17,8 +17,8 @@ RoBPin2 = 16
 RoAPin3 = 19    
 RoBPin3 = 26 
 """ """
-RoAPin3 = 6   
-RoBPin3 = 13 
+RoAPin4 = 6   
+RoBPin4 = 13 
 """ variables """
 globalCounter = 0.0
 gain=0.97593582887
