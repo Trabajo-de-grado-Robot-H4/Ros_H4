@@ -81,8 +81,6 @@ def rotaryDeal():
          #print ("{0:.3f}".format(globalCounter*gain))
  grados1=globalCounter1*gain
 """ enconder 2 """
- 
- 
  if flag2 == 1:
       flag2 = 0
       if (Last_RoB_Status2 == 0) and (Current_RoB_Status2 == 1):
