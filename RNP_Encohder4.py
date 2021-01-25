@@ -20,12 +20,12 @@ RoBPin3 = 26
 RoAPin4 = 6   
 RoBPin4 = 13 
 """ variables """
-globalCounter = 0.0
+globalCounter1,globalCounter2,globalCounter3,globalCounter4 = 0.0
 gain=0.97593582887
-flag = 0
-Last_RoB_Status = 0.0
-Current_RoB_Status = 0.0
-grados=0.0
+flag1,flag2,flag3,flag4 = 0
+Last_RoB_Status1,Last_RoB_Status2,Last_RoB_Status3,Last_RoB_Status4 = 0.0
+Current_RoB_Status1,Current_RoB_Status2,Current_RoB_Status3,Current_RoB_Status4 = 0.0
+grados1,grados2,grados3,grados4=0.0
 
 """ funcion setup """
 def setup():
@@ -73,7 +73,7 @@ def rotaryDeal():
  Last_RoB_Status3 = GPIO.input(RoBPin3)
  Last_RoB_Status4 = GPIO.input(RoBPin4)
     
- while(not GPIO.input(RoAPin1) ):
+ while((not GPIO.input(RoAPin1)) and (not GPIO.input(RoAPin2)) and (not GPIO.input(RoAPin3))  and (not GPIO.input(RoAPin4)) ):
    Current_RoB_Status1 = GPIO.input(RoBPin1)
    flag1 = 1
    Current_RoB_Status2 = GPIO.input(RoBPin2)
