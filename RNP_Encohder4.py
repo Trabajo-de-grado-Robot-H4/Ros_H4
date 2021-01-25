@@ -48,10 +48,22 @@ def rotaryDeal():
  global flag2
  global flag3
  global flag4
- global Last_RoB_Status1,Last_RoB_Status2,Last_RoB_Status3,Last_RoB_Status4 
- global Current_RoB_Status1,Current_RoB_Status2,Current_RoB_Status3,Current_RoB_Status4
- global globalCounter1,globalCounter2,globalCounter3,globalCounter4
- global grados1, grados2, grados3, grados4
+ global Last_RoB_Status1
+ global Last_RoB_Status2
+ global Last_RoB_Status3
+ global Last_RoB_Status4 
+ global Current_RoB_Status1
+ global Current_RoB_Status2
+ global Current_RoB_Status3
+ global Current_RoB_Status4
+ global globalCounter1
+ global globalCounter2
+ global globalCounter3
+ global globalCounter4
+ global grados1
+ global grados2
+ global grados3
+ global grados4
  global gain
  global grados
  
