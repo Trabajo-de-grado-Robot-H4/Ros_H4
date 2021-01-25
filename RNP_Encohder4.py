@@ -73,7 +73,7 @@ def rotaryDeal():
          #print ('globalCounter =')
          #print ("{0:.3f}".format(globalCounter*gain))
  grados1=globalCounter1*gain
-"""enconder 2 """"
+"""enconder 2 """
    Current_RoB_Status2 = GPIO.input(RoBPin2)
    flag2 = 1
  
