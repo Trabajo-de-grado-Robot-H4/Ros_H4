@@ -11,12 +11,12 @@ Enc=Pose() # Tipo de dato pose
 RoAPin = 21    
 RoBPin = 20   
 """ variables """
-globalCounter = 0.0
 gain=360/(11*34*4)
 grados=0
 QEM=[0,-1,0,1,1,0,-1,0,0,1,0,-1,-1,0,1,0]
 index=0
 count=0
+statep=0
 """ funcion setup """
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -31,6 +31,7 @@ def rotaryDeal():
  global gain
  global grados
  global count
+ global statep
    
  A= GPIO.input(RoAPin)
  B= GPIO.input(RoBPin)
