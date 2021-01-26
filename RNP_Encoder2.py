@@ -55,7 +55,7 @@ def destroy():
         GPIO.cleanup()
 """ funcion que publica los datos del encoder """
 def talker():
-    pub = rospy.Publisher('Encoder', Pose, queue_size=10)
+    pub = rospy.Publisher('Encoder2', Pose, queue_size=10)
     rospy.init_node('talker2', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
