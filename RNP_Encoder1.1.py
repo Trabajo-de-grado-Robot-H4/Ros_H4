@@ -12,12 +12,11 @@ RoAPin = 21
 RoBPin = 20   
 """ variables """
 globalCounter = 0.0
-gain=0.97593582887
-flag = 0
-Last_RoB_Status = 0.0
-Current_RoB_Status = 0.0
-grados=0.0
-
+gain=360/(11*34*4)
+grados=0
+QEM=[0,-1,0,1,1,0,-1,0,0,1,0,-1,-1,0,1,0]
+index=0
+count=0
 """ funcion setup """
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -26,29 +25,30 @@ def setup():
     
 """ funcion que lee el encoder """
 def rotaryDeal():
- global flag
- global Last_RoB_Status
- global Current_RoB_Status
- global globalCounter
+  
+ global QEM
+ global indexx
  global gain
  global grados
+ global count
+   
+ A= GPIO.input(RoAPin)
+ B= GPIO.input(RoBPin)
+ if (A==1) and (B==1):
+    state=0
+ if (A==1) and (B==0):
+    state=1
+ if (A==0) and (B==0):
+    state=2
+ if (A==0) and (B==1):
+    state=3
+ indexx=4*state + statep
+ if (count >= 1496) or (count<=-1496):
+        count=0
+ count=count + QEM[idexx]   
+ statep=state
 
- Last_RoB_Status = GPIO.input(RoBPin)
- while(not GPIO.input(RoAPin)):
-   Current_RoB_Status = GPIO.input(RoBPin)
-   flag = 1
- 
- if flag == 1:
-      flag = 0
-      if (Last_RoB_Status == 0) and (Current_RoB_Status == 1):
-         globalCounter = globalCounter + 1.0
-         #print ('globalCounter =')
-         #print ("{0:.3f}".format(globalCounter*gain))
-      if (Last_RoB_Status == 1) and (Current_RoB_Status == 0):
-         globalCounter = globalCounter - 1.0
-         #print ('globalCounter =')
-         #print ("{0:.3f}".format(globalCounter*gain))
- grados=globalCounter*gain
+ grados=count*gain
  return (grados)
 """ funcion que limpia los purtos utilizados """
 def destroy():
