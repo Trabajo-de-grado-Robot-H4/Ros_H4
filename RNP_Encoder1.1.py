@@ -27,7 +27,7 @@ def setup():
 def rotaryDeal():
   
  global QEM
- global indexx
+ global index
  global gain
  global grados
  global count
@@ -42,10 +42,10 @@ def rotaryDeal():
     state=2
  if (A==0) and (B==1):
     state=3
- indexx=4*state + statep
+ index=4*state + statep
  if (count >= 1496) or (count<=-1496):
         count=0
- count=count + QEM[idexx]   
+ count=count + QEM[index]   
  statep=state
 
  grados=count*gain
