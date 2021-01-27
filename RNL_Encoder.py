@@ -16,11 +16,7 @@ def listener():
     rospy.init_node('listener', anonymous=True)
 #esto es una prueba
 #oytaa
-<<<<<<< HEAD
-#esta es otra
-=======
 
->>>>>>> d2866e0ff3bf82c7f97b78cc552d33d8fdebbf25
     rospy.Subscriber("Encoder", Pose, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
