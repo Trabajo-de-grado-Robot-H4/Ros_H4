@@ -21,15 +21,23 @@ def setup():
 
 """inicio del programa """
 def callback(data):
-    variable_x = data.position.x
+    Esfuerzo = data.position.x
     p = GPIO.PWM(MotorE1, 50)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
     p.start(0)  #Inicializamos el objeto PWM
-    
-    GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2  
-    GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
-    p.ChangeDutyCycle(variable_x)
-    rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
-    
+
+
+     if Esfuerzo > 0:
+         GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+         GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+         p.ChangeDutyCycle(Esfuerzo)
+         rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+     else:
+         GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+         GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+         p.ChangeDutyCycle(abs(Esfuerzo))
+         rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+
+
 def listener():
 
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -50,4 +58,3 @@ if __name__ == '__main__':
             listener()
     except rospy.ROSInterruptException:
             pass
-    
