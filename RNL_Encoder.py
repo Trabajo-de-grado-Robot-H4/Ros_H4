@@ -5,7 +5,7 @@ from geometry_msgs.msg import Pose
 def callback(data):
     variable_x = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
-    
+
 def listener():
 
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -14,7 +14,8 @@ def listener():
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
     rospy.init_node('listener', anonymous=True)
-
+#esto es una prueba
+#oytaa
     rospy.Subscriber("Encoder", Pose, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
