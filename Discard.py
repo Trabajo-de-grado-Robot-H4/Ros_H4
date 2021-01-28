@@ -33,18 +33,23 @@ def callback(data):
     p = GPIO.PWM(MotorE1, 100)# Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
     p.start(0)  #Inicializamos el objeto PWM
     
-    while data.position.x != Esfuerzo:
+    while Last_Esfuerzo == Esfuerzo:
         if Esfuerzo > 0:
+            Last_esfuerzo=Esfuerzo
             GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
             GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
             p.ChangeDutyCycle(Esfuerzo)
             listener()
+            Esfuerzo = data.position.x
+            
 
         else:
+            Last_esfuerzo=Esfuerzo
             GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
             GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
             p.ChangeDutyCycle(abs(Esfuerzo))
-            lsitener()
+            listener()
+            Esfuerzo = data.position.x
 
 def destroy():
         GPIO.cleanup()
