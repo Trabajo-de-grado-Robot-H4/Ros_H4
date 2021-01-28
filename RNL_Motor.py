@@ -24,10 +24,11 @@ def setup():
 """inicio del programa """
 def callback(data):
     Esfuerzo = data.position.x
-    p = GPIO.PWM(MotorE1, 50)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
+    p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
+   
+
+  while True:
     p.start(0)  #Inicializamos el objeto PWM
-
-
     if Esfuerzo > 0:
          GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
          GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
