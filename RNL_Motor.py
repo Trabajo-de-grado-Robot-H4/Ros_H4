@@ -26,7 +26,7 @@ def callback(data):
     p.start(0)  #Inicializamos el objeto PWM
 
 
-     if Esfuerzo > 0:
+    if Esfuerzo > 0:
          GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
          GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
          p.ChangeDutyCycle(Esfuerzo)
