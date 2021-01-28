@@ -27,14 +27,14 @@ def callback(data):
     p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
    
 
-    while True:
-      p.start(0)  #Inicializamos el objeto PWM
-      if Esfuerzo > 0:
+   
+    p.start(0)  #Inicializamos el objeto PWM
+    if Esfuerzo > 0:
          GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
          GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
          p.ChangeDutyCycle(Esfuerzo)
          rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
-      else:
+    else:
          GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
          GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
          p.ChangeDutyCycle(abs(Esfuerzo))
@@ -42,7 +42,7 @@ def callback(data):
 
 
 def listener():
-
+   while True:
     # In ROS, nodes are uniquely named. If two nodes with the same
     # name are launched, the previous one is kicked off. The
     # anonymous=True flag means that rospy will choose a unique
