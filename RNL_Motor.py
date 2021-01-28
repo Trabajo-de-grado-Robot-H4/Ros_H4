@@ -9,6 +9,9 @@ import time
 MotorIN1 = 15
 MotorIN2 = 14
 MotorE1 = 18
+""" Declaracion de variables """
+Last_esfuerzo=0
+Esfuerzo=0
 
 def setup():
 
@@ -23,26 +26,29 @@ def setup():
 
 """inicio del programa """
 def callback(data):
-    Esfuerzo = data.position.x
-    p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
-   
-
-   
-    p.start(0)  #Inicializamos el objeto PWM
-    if Esfuerzo > 0:
+     Esfuerzo = data.position.x
+     p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
+     
+     p.start(0)  #Inicializamos el objeto PWM
+     while Esfuerzo != Last_esfuerzo
+       
+        
+      if Esfuerzo > 0:
          GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
          GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
          p.ChangeDutyCycle(Esfuerzo)
          rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
-    else:
+         Last_esfuerzo=Esfuerzo
+      else:
          GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
          GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
          p.ChangeDutyCycle(abs(Esfuerzo))
          rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+         Last_esfuerzo=Esfuerzo
 
 
 def listener():
-   while True:
+  
     # In ROS, nodes are uniquely named. If two nodes with the same
     # name are launched, the previous one is kicked off. The
     # anonymous=True flag means that rospy will choose a unique
