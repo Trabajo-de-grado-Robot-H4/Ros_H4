@@ -65,7 +65,7 @@ def listener():
 
 
 def pwm():
-    global p
+    p = GPIO.PWM(MotorE1, 50)
     p.start(0)  #Inicializamos el objeto PWM
 
     while True:
