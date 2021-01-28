@@ -32,16 +32,18 @@ def callback(data):
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
     p = GPIO.PWM(MotorE1, 100)
     
-    while True:
+    while data.position.x != Esfuerzo:
         if Esfuerzo > 0:
             GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
             GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
             p.ChangeDutyCycle(Esfuerzo)
+            listener()
 
         else:
             GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
             GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
             p.ChangeDutyCycle(abs(Esfuerzo))
+            lsitener()
 
 def destroy():
         GPIO.cleanup()
