@@ -43,6 +43,8 @@ def listener():
     rospy.Subscriber("Datosmotor", Pose, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
+    worker = threading.Thread(name='pwm1',target=pwm,demon=True)
+    worker.start()
     rospy.spin()
 
 
@@ -70,8 +72,7 @@ if __name__ == '__main__':
     setup()
     try:
             listener()
-            worker = threading.Thread(name='pwm1',target=pwm,demon=True)
-            worker.start()
+            
     except rospy.ROSInterruptException:
             destroy()
             pass
