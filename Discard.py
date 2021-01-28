@@ -23,8 +23,8 @@ def setup():
     GPIO.setup(MotorIN1,GPIO.OUT)
     GPIO.setup(MotorIN2,GPIO.OUT)
     GPIO.setup(MotorE1,GPIO.OUT)
-    p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
-    p.start(0)  #Inicializamos el objeto PWM
+    global p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
+    global p.start(0)  #Inicializamos el objeto PWM
 
 """inicio del programa """
 def callback(data):
