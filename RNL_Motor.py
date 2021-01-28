@@ -71,8 +71,15 @@ def pwm():
 
     while True:
         global Esfuerzo
-        p.ChangeDutyCycle(Esfuerzo)
+        if Esfuerzo > 0:
+            GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+            GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+            p.ChangeDutyCycle(Esfuerzo)
 
+        else:
+            GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+            GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+            p.ChangeDutyCycle(abs(Esfuerzo))
 
 if __name__ == '__main__':
     setup()
