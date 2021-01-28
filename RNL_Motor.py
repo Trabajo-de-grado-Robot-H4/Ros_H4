@@ -27,11 +27,13 @@ def setup():
 
 """inicio del programa """
 def callback(data):
+    global Esfuerzo
     Esfuerzo = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
         
-def pwm(num):
-    rate = rospy.Rate(num) # ROS Rate at 5Hz
+def pwm():
+    global Esfuerzo
+    rate = rospy.Rate(Esfuerzo) # ROS Rate at 5Hz
     GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
     GPIO.output(MotorIN2,GPIO.LOW)
     
@@ -55,7 +57,7 @@ def listener():
     global Esfuerzo 
 
     # spin() simply keeps python from exiting until this node is stopped
-    worker = threading.Thread(target=pwm,args=(data.position.x))
+    worker = threading.Thread(target=pwm)
     worker.start()
     rospy.spin()
 
