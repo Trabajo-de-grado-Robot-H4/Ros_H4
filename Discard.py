@@ -10,7 +10,7 @@ MotorIN1 = 15
 MotorIN2 = 14
 MotorE1 = 18
 """ Declaracion de variables """
-Esfuerzo =0
+global Esfuerzo =0
 Last_esfuerzo=0
 
 def setup():
@@ -27,6 +27,8 @@ def setup():
 def callback(data):
         
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+    Esfuerzo = data.position.x
+    return Esfuerzo
         
 def destroy():
         GPIO.cleanup()
@@ -42,7 +44,6 @@ def listener():
     rospy.Subscriber("Datosmotor", Pose, callback)
     rospy.spin()
     
-    Esfuerzo = data.position.x
     p = GPIO.PWM(MotorE1, 100)# Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
     p.start(0)  #Inicializamos el objeto PWM
         if Esfuerzo > 0:
