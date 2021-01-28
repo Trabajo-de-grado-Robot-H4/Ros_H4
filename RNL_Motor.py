@@ -16,7 +16,7 @@ Esfuerzo=0
 def setup():
 
     GPIO.setmode(GPIO.BCM)
-    #GPIO.setwarnings(False)
+    GPIO.setwarnings(False)
 
     """ Setup del motor """
     GPIO.setup(MotorIN1,GPIO.OUT)
