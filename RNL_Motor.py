@@ -44,7 +44,8 @@ def callback(data):
          rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
          Last_esfuerzo=Esfuerzo
 
-
+def destroy():
+        GPIO.cleanup()
 def listener():
   
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -65,4 +66,5 @@ if __name__ == '__main__':
     try:
             listener()
     except rospy.ROSInterruptException:
+            destroy()
             pass
