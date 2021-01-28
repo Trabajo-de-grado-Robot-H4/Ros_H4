@@ -55,7 +55,7 @@ def listener():
     global Esfuerzo 
 
     # spin() simply keeps python from exiting until this node is stopped
-    worker = threading.Thread(target=pwm,args=(Esfuerzo))
+    worker = threading.Thread(target=pwm,args=(data.position.x))
     worker.start()
     rospy.spin()
 
