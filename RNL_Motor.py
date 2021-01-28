@@ -32,6 +32,9 @@ def callback(data):
      Esfuerzo = data.position.x
      p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
      p.start(0)  #Inicializamos el objeto PWM
+        
+     GPIO.output(MotorIN1,GPIO.HIGH)
+     GPIO.output(MotorIN2,GPIO.LOW)
      p.ChangeDutyCycle(Last_esfuerzo)
         
      if Esfuerzo > 0:
