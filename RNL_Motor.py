@@ -30,7 +30,7 @@ def callback(data):
      Esfuerzo = data.position.x
      return (Esfuerzo)
 def PWM():
-     while true:
+     while True:
             listener()
             Esfuerzo=callback()
             p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
