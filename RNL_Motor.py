@@ -71,8 +71,7 @@ def pwm():
 
     while True:
         global Esfuerzo
-       
-            p.ChangeDutyCycle(Esfuerzo)
+        p.ChangeDutyCycle(Esfuerzo)
 
 
 if __name__ == '__main__':
