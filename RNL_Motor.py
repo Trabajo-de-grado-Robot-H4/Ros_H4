@@ -30,7 +30,7 @@ def callback(data):
     Esfuerzo = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
     
-    p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
+    p = GPIO.PWM(MotorE1, 50)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
     p.start(0)  #Inicializamos el objeto PWM
     
     if Esfuerzo > 0:
@@ -66,8 +66,8 @@ def listener():
 
 def pwm():
 
-    p = GPIO.PWM(MotorE1, 50)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
-    p.start(0)  #Inicializamos el objeto PWM
+    #p = GPIO.PWM(MotorE1, 50)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
+    #p.start(0)  #Inicializamos el objeto PWM
 
     while True:
         global Esfuerzo
