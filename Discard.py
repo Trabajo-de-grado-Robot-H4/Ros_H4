@@ -10,7 +10,7 @@ MotorIN1 = 15
 MotorIN2 = 14
 MotorE1 = 18
 """ Declaracion de variables """
-global Esfuerzo =0
+Esfuerzo =0
 Last_esfuerzo=0
 
 def setup():
