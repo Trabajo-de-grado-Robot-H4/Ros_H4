@@ -52,7 +52,7 @@ def pwm():
     p.start(0)  #Inicializamos el objeto PWM
     
     while True:
-     listener()
+     
      Esfuerzo=callback()
      if Esfuerzo > 0:
         GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
@@ -70,7 +70,7 @@ def pwm():
 if __name__ == '__main__':
     setup()
     try:
-           
+            listener()
             pwm()
     except rospy.ROSInterruptException:
             destroy()
