@@ -28,11 +28,12 @@ def setup():
 
 """inicio del programa """
 def callback(data):
+    
     Esfuerzo = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
     p = GPIO.PWM(MotorE1, 100)# Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
     p.start(0)  #Inicializamos el objeto PWM
-    
+    Last_esfuerzo=0
     while Last_Esfuerzo == Esfuerzo:
         if Esfuerzo > 0:
             Last_esfuerzo=Esfuerzo
