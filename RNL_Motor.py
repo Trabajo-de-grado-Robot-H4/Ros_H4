@@ -28,6 +28,7 @@ def setup():
 """inicio del programa """
 def callback(data):
     Esfuerzo = data.position.x
+    rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
     return (Esfuerzo) 
 def destroy():
         GPIO.cleanup()
@@ -54,12 +55,12 @@ def pwm():
         GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
         GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
         p.ChangeDutyCycle(Esfuerzo)
-        rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+        
      else:
        GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
        GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
        p.ChangeDutyCycle(abs(Esfuerzo))
-       rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+       
   
 
 if __name__ == '__main__':
