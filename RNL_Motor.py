@@ -10,8 +10,11 @@ MotorIN1 = 15
 MotorIN2 = 14
 MotorE1 = 18
 """ Declaracion de variables """
+Esfuerzo =0
+Last_esfuerzo=0
 
-
+global Last_esfuerzo
+global Esfuerzo
 def setup():
 
     GPIO.setmode(GPIO.BCM)
