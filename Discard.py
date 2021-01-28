@@ -56,7 +56,8 @@ def listener():
     # run simultaneously.
     rospy.init_node('ListenerM', anonymous=True)
     rospy.Subscriber("Datosmotor", Pose, callback)
-
+    rospy.spin()
+    
 if __name__ == '__main__':
     setup()
     try:
