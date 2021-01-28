@@ -29,25 +29,19 @@ def setup():
 def callback(data):
     Esfuerzo = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+        
+def pwm(num):
+    rate = rospy.Rate(num) # ROS Rate at 5Hz
+    GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+    GPIO.output(MotorIN2,GPIO.LOW)
     
-    p = GPIO.PWM(MotorE1, 50)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
-    p.start(0)  #Inicializamos el objeto PWM
-    
-    if Esfuerzo > 0:
-        GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
-        GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
-        p.ChangeDutyCycle(Esfuerzo)
-
-    else:
-        GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
-        GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
-        p.ChangeDutyCycle(abs(Esfuerzo))
-    worker = threading.Thread(name='pwm1',target=pwm,daemon=True)
-    worker.start() 
-
-
+    while not rospy.is_shutdown():
+        GPIO.output(MotorE1,GPIO.HIGH)
+        rate.sleep()
+        
 def destroy():
         GPIO.cleanup()
+        
 def listener():
 
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -58,27 +52,13 @@ def listener():
     rospy.init_node('ListenerM', anonymous=True)
 
     rospy.Subscriber("Datosmotor", Pose, callback)
+    global Esfuerzo 
 
     # spin() simply keeps python from exiting until this node is stopped
-   
+    worker = threading.Thread(target=pwm,args=(Esfuerzo))
+    worker.start()
     rospy.spin()
 
-
-def pwm():
-    p = GPIO.PWM(MotorE1, 50)
-    p.start(0)  #Inicializamos el objeto PWM
-
-    while True:
-        global Esfuerzo
-        if Esfuerzo > 0:
-            GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
-            GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
-            p.ChangeDutyCycle(Esfuerzo)
-
-        else:
-            GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
-            GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
-            p.ChangeDutyCycle(abs(Esfuerzo))
 
 if __name__ == '__main__':
     setup()
