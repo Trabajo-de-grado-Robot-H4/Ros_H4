@@ -13,6 +13,8 @@ MotorE1 = 18
 def setup():
 
     GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+
     """ Setup del motor """
     GPIO.setup(MotorIN1,GPIO.OUT)
     GPIO.setup(MotorIN2,GPIO.OUT)
