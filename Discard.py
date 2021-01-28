@@ -41,12 +41,14 @@ def callback(data):
         GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
         p.ChangeDutyCycle(Esfuerzo)
         rospy.loginfo(rospy.get_caller_id() + 'Apliqué %f', Esfuerzo)
+        time.sleep(5)
             
     else:
         GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
         GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
         p.ChangeDutyCycle(abs(Esfuerzo))
         rospy.loginfo(rospy.get_caller_id() + 'Apliqué %f', Esfuerzo)
+        time.sleep(5)
 
 def destroy():
         GPIO.cleanup()
