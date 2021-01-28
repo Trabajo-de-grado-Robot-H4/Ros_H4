@@ -45,6 +45,8 @@ def listener():
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
+    
+    pwm()
 def pwm():
      Esfuerzo=callback()
      p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
@@ -68,7 +70,7 @@ if __name__ == '__main__':
     setup()
     try:
             listener()
-            pwm()
+            
     except rospy.ROSInterruptException:
             destroy()
             pass
