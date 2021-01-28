@@ -71,7 +71,7 @@ if __name__ == '__main__':
     setup()
     try:
            
-            
+            pwm()
     except rospy.ROSInterruptException:
             destroy()
             pass
