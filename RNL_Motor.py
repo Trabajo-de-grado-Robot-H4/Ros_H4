@@ -13,8 +13,7 @@ MotorE1 = 18
 Esfuerzo =0
 Last_esfuerzo=0
 
-global Last_esfuerzo
-global Esfuerzo
+
 def setup():
 
     GPIO.setmode(GPIO.BCM)
@@ -28,6 +27,8 @@ def setup():
 
 """inicio del programa """
 def callback(data):
+     global Last_esfuerzo
+     global Esfuerzo
      Esfuerzo = data.position.x
      p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
      p.start(0)  #Inicializamos el objeto PWM
