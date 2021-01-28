@@ -29,6 +29,19 @@ def setup():
 def callback(data):
     Esfuerzo = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+    if Esfuerzo > 0:
+        GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+        GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+        p.ChangeDutyCycle(Esfuerzo)
+        logging.debug(Esfuerzo)
+
+    else:
+        GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+        GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+        p.ChangeDutyCycle(abs(Esfuerzo))
+        logging.debug(Esfuerzo)
+
+
 def destroy():
         GPIO.cleanup()
 def listener():
