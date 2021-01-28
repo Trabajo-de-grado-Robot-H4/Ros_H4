@@ -29,21 +29,43 @@ def setup():
 def callback(data):
     Esfuerzo = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
+
 def destroy():
         GPIO.cleanup()
 def listener():
-
+  
     # In ROS, nodes are uniquely named. If two nodes with the same
     # name are launched, the previous one is kicked off. The
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
     rospy.init_node('ListenerM', anonymous=True)
-
+    
     rospy.Subscriber("Datosmotor", Pose, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
+    
+    
+def pwm():
+    p = GPIO.PWM(MotorE1, 100)  # Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
+    p.start(0)  #Inicializamos el objeto PWM
+    
+    while True:
+     
+     Esfuerzo=callback()
+     if Esfuerzo > 0:
+        GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+        GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+        p.ChangeDutyCycle(Esfuerzo)
+        print(Esfuerzo)
+        
+     else:
+       GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
+       GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
+       p.ChangeDutyCycle(abs(Esfuerzo))
+       rospy.loginfo(rospy.get_caller_id() + 'I heard2 %f', Esfuerzo)
+  
 
 
 def pwm():
@@ -70,8 +92,7 @@ if __name__ == '__main__':
     setup()
     try:
             listener()
-            worker = threading.Thread(name='pwm1',target=pwm,demon=True)
-            worker.start()
+
     except rospy.ROSInterruptException:
             destroy()
             pass
