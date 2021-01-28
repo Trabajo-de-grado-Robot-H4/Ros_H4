@@ -12,12 +12,13 @@ MotorE1 = 18
 """ Declaracion de variables """
 Esfuerzo =0
 Last_esfuerzo=0
+GPIO.setmode(GPIO.BCM)
 p = GPIO.PWM(MotorE1, 100)# Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
 p.start(0)  #Inicializamos el objeto PWM
 
 def setup():
 
-    GPIO.setmode(GPIO.BCM)
+    
     GPIO.setwarnings(False)
 
     """ Setup del motor """
