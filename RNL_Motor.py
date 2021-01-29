@@ -21,7 +21,7 @@ def pwm():
     while True:
             rospy.init_node('listener')
             list = Listener()
-            print(list.return_value)
+
 
 
 
