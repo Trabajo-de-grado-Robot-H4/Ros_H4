@@ -4,6 +4,9 @@ from geometry_msgs.msg import Pose
 import RPi.GPIO as GPIO
 import time
 import threading
+import logging
+logging.basicConfig( level=logging.DEBUG,
+    format='[%(levelname)s] - %(threadName)-10s : %(message)s')
 
 class Listener(object):
    def __init__(self):
@@ -16,13 +19,21 @@ class Listener(object):
        self.return_value = data.position.x
      else:
        rospy.loginfo(data.position.x)
+def pwm():
+    logging.debug('Lanzado')
+    while True:
+            list = Listener()
+            logging.debug(list.return_value)
+
 
 
 if __name__ == '__main__':
-  rospy.init_node('listener')
-  list = Listener()
-
-  while list.flag:
-    rospy.sleep(1)
-  print(list.return_value)
-  print('Value was non-stop')
+    setup()
+    try:
+        rospy.init_node('listener')
+        d = threading.Thread(target=pwm, name='Daemon')
+        d.setDaemon(True)
+        d.start()
+    except rospy.ROSInterruptException:
+        destroy()
+        pass
