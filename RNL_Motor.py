@@ -21,16 +21,16 @@ class Listener(object):
        rospy.loginfo(data.position.x)
        self.return_value = data.position.x
 def pwm():
+
     logging.debug('Lanzado')
     while True:
+            rospy.init_node('listener')
             list = Listener()
 
 
 
 if __name__ == '__main__':
 
-        rospy.init_node('listener')
-        list=Listener()
         d = threading.Thread(target=pwm, name='Daemon')
         d.setDaemon(True)
         d.start()
