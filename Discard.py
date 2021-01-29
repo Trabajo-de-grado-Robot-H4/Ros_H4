@@ -61,7 +61,7 @@ def listener():
     rospy.init_node('ListenerM', anonymous=True)
     rospy.Subscriber("Datosmotor", Pose, callback)
 
-    rospy.loginfo(rospy.get_caller_id() + 'Apliqué  1%f', Esfuerzo)
+    rospy.loginfo(rospy.get_caller_id() + 'Apliqué  1%f',45)
     print(Esfuerzo)
     rospy.spin()
 
