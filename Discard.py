@@ -15,7 +15,7 @@ Last_esfuerzo=0
 
 def setup():
 
-    
+
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
@@ -23,26 +23,26 @@ def setup():
     GPIO.setup(MotorIN1,GPIO.OUT)
     GPIO.setup(MotorIN2,GPIO.OUT)
     GPIO.setup(MotorE1,GPIO.OUT)
-    
-    
+
+
 
 """inicio del programa """
 def callback(data):
-    
-    
+
+
     p = GPIO.PWM(MotorE1, 100)# Creamos la instancia PWM con el GPIO a utilizar y la frecuencia de la señal PWM
     p.start(0)  #Inicializamos el objeto PWM
-    
+
     Esfuerzo = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', Esfuerzo)
-    
+
     if Esfuerzo > 0:
         GPIO.output(MotorIN1,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
         GPIO.output(MotorIN2,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
         p.ChangeDutyCycle(Esfuerzo)
         rospy.loginfo(rospy.get_caller_id() + 'Apliqué %f', Esfuerzo)
         time.sleep(5)
-            
+
     else:
         GPIO.output(MotorIN1,GPIO.LOW)   # Establecemos el sentido de giro con los pines IN1 e IN2
         GPIO.output(MotorIN2,GPIO.HIGH)  # Establecemos el sentido de giro con los pines IN1 e IN2
@@ -52,7 +52,7 @@ def callback(data):
 
 def destroy():
         GPIO.cleanup()
-        
+
 def listener():
 
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -63,12 +63,13 @@ def listener():
     rospy.init_node('ListenerM', anonymous=True)
     rospy.Subscriber("Datosmotor", Pose, callback)
     rospy.spin()
-    
+
 if __name__ == '__main__':
     setup()
     try:
+            global  Esfuerzo
             listener()
-            
+            print(Esfuerzo)
     except rospy.ROSInterruptException:
             destroy()
             pass
