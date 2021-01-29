@@ -24,7 +24,6 @@ def pwm():
     logging.debug('Lanzado')
     while True:
             list = Listener()
-            logging.debug(list.return_value)
 
 
 
