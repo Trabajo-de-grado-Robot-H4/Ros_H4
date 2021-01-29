@@ -12,16 +12,14 @@ class Listener(object):
    def __init__(self):
      self.flag = True
      self.sub = rospy.Subscriber('Datosmotor', Pose, self.echo)
-     d = threading.Thread(target=pwm, name='Daemon')
-     d.setDaemon(True)
-     d.start()
+
 
    def echo(self, data):  # data.msg can be 'stop' string or any other string
      if data.position.x == 0:
        self.flag = False
-       self.return_value = data.position.x
      else:
        rospy.loginfo(data.position.x)
+       self.return_value = data.position.x
 def pwm():
     logging.debug('Lanzado')
     while True:
@@ -31,9 +29,12 @@ def pwm():
 
 
 if __name__ == '__main__':
-    try:
-        rospy.init_node('listener')
 
-    except rospy.ROSInterruptException:
-        destroy()
-        pass
+        rospy.init_node('listener')
+        lis.Listener()
+        d = threading.Thread(target=pwm, name='Daemon')
+        d.setDaemon(True)
+        d.start()
+        while list.flag:
+             rospy.sleep(1)
+        print 'Value was non-stop'
