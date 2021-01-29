@@ -52,7 +52,7 @@ def destroy():
         GPIO.cleanup()
 
 def listener():
-
+    global Esfuerzo
     # In ROS, nodes are uniquely named. If two nodes with the same
     # name are launched, the previous one is kicked off. The
     # anonymous=True flag means that rospy will choose a unique
@@ -60,14 +60,17 @@ def listener():
     # run simultaneously.
     rospy.init_node('ListenerM', anonymous=True)
     rospy.Subscriber("Datosmotor", Pose, callback)
+
+    rospy.loginfo(rospy.get_caller_id() + 'Apliqué  1%f', Esfuerzo)
+    print(Esfuerzo)
     rospy.spin()
 
 if __name__ == '__main__':
     setup()
     try:
-            global  Esfuerzo
+
             listener()
-            print(Esfuerzo)
+
     except rospy.ROSInterruptException:
             destroy()
             pass
