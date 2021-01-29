@@ -28,7 +28,6 @@ def pwm():
 
 
 if __name__ == '__main__':
-    setup()
     try:
         rospy.init_node('listener')
         d = threading.Thread(target=pwm, name='Daemon')
