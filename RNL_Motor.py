@@ -31,7 +31,7 @@ def pwm():
 if __name__ == '__main__':
 
         rospy.init_node('listener')
-        lis.Listener()
+        list=Listener()
         d = threading.Thread(target=pwm, name='Daemon')
         d.setDaemon(True)
         d.start()
