@@ -12,6 +12,9 @@ class Listener(object):
    def __init__(self):
      self.flag = True
      self.sub = rospy.Subscriber('Datosmotor', Pose, self.echo)
+     d = threading.Thread(target=pwm, name='Daemon')
+     d.setDaemon(True)
+     d.start()
 
    def echo(self, data):  # data.msg can be 'stop' string or any other string
      if data.position.x == 0:
@@ -30,9 +33,7 @@ def pwm():
 if __name__ == '__main__':
     try:
         rospy.init_node('listener')
-        d = threading.Thread(target=pwm, name='Daemon')
-        d.setDaemon(True)
-        d.start()
+
     except rospy.ROSInterruptException:
         destroy()
         pass
