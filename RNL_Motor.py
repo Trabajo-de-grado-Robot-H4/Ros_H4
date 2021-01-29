@@ -34,6 +34,3 @@ if __name__ == '__main__':
         d = threading.Thread(target=pwm, name='Daemon')
         d.setDaemon(True)
         d.start()
-        while list.flag:
-             rospy.sleep(1)
-        print('Value was non-stop')
