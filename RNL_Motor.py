@@ -13,7 +13,7 @@ class Listener(object):
    def echo(self, data):  # data.msg can be 'stop' string or any other string
      if data.position.x == 0:
        self.flag = False
-       self.return_value = data.foo
+       self.return_value = data.position.x
      else:
        rospy.loginfo(data.position.x)
 
