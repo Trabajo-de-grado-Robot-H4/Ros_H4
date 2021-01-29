@@ -25,4 +25,4 @@ if __name__ == '__main__':
   while list.flag:
     rospy.sleep(1)
 
-  print 'Value was non-stop'
+  print('Value was non-stop')
