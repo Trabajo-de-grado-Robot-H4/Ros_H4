@@ -8,8 +8,8 @@ import time             # libreria para obtener el tiempo
 
 Enc=Pose() # Tipo de dato pose
 """ pines usados en la rapsberry"""
-RoAPin = 12    
-RoBPin = 16   
+RoAPin = 16    
+RoBPin = 12   
 """ variables """
 globalCounter = 0.0
 gain=0.97593582887
