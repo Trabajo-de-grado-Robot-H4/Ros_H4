@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import board
 import busio
-import adafruit_pca968
+import adafruit_pca9685
 
 #inicializacion de protocoño de comunicacion I2C
 i2c = busio.I2C(board.SCL, board.SDA)
