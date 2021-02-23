@@ -12,4 +12,4 @@ pca.frequency = 60
 
 
 #enviamos el PWM al Pin deseado, con
-pca.channels[0].duty_cycle = 0x7FFF
+pca.channels[0].duty_cycle = 0xFFFF
