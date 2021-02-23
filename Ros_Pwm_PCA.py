@@ -12,4 +12,13 @@ pca.frequency = 60
 
 
 #enviamos el PWM al Pin deseado, con
-pca.channels[0].duty_cycle = 0xFFFF
+
+Datos_pid=[]
+for v in range(4):
+    val=int(input("Inserte pwm en los canales 1,2,3,4 en este orden: "))
+    Datos_pid.append(val)
+
+pca.channels[0].duty_cycle = Datos_pid[0]
+pca.channels[1].duty_cycle = Datos_pid[1]
+pca.channels[2].duty_cycle = Datos_pid[2]
+pca.channels[3].duty_cycle = Datos_pid[3]
