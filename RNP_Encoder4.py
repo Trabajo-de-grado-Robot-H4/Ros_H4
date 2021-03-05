@@ -2,14 +2,14 @@
 # license removed for brevity
 """ importar librerias necesarias """
 import rospy
-from geometry_msgs.msg import Pose # importamos el tipo de dato pose
+from geometry_msgs.msg import Point # importamos el tipo de dato pose
 import RPi.GPIO as GPIO # libreria para comunicacion de puestos GPIO de la raspberry
 import time             # libreria para obtener el tiempo
 
-Enc=Pose() # Tipo de dato pose
+Enc=Point() # Tipo de dato point
 """ pines usados en la rapsberry"""
-RoAPin = 13  
-RoBPin = 6 
+RoAPin = 13
+RoBPin = 6
 """ variables """
 globalCounter = 0.0
 gain=0.97593582887
@@ -23,7 +23,7 @@ def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN) # input mode
     GPIO.setup(RoBPin, GPIO.IN)
-    
+
 """ funcion que lee el encoder """
 def rotaryDeal():
  global flag
@@ -37,7 +37,7 @@ def rotaryDeal():
  while(not GPIO.input(RoAPin)):
    Current_RoB_Status = GPIO.input(RoBPin)
    flag = 1
- 
+
  if flag == 1:
       flag = 0
       if (Last_RoB_Status == 0) and (Current_RoB_Status == 1):
@@ -55,14 +55,14 @@ def destroy():
         GPIO.cleanup()
 """ funcion que publica los datos del encoder """
 def talker():
-    pub = rospy.Publisher('Encoder4', Pose, queue_size=10)
+    pub = rospy.Publisher('Encoder4', Point, queue_size=10)
     rospy.init_node('talker4', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        
-        
+
+
         sensor=rotaryDeal()
-        Enc.position.x=sensor
+        Enc.x=sensor
         #Enc.position.y=3
         #Enc.position.z=12
         #rospy.loginfo(Enc)
