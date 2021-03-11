@@ -1,32 +1,49 @@
 #!/usr/bin/env python
+import board
+import busio
+import adafruit_pca9685
 import rospy
 from geometry_msgs.msg import Pose
-import RPi.GPIO as GPIO
-import time
-import threading
-
-class Listener(object):
-   def __init__(self):
-     self.flag = True
-     self.sub = rospy.Subscriber('Datosmotor', Pose, self.echo)
-
-
-   def echo(self, data):  # data.msg can be 'stop' string or any other string
-     if data.position.x == 0:
-       self.flag = False
-     else:
-       rospy.loginfo(data.position.x)
-       self.return_value = data.position.x
-def pwm():
-    while True:
-            rospy.init_node('listener')
-            list = Listener()
 
 
 
+def setup():
+    #inicializacion de protocoño de comunicacion I2C
+    i2c = busio.I2C(board.SCL, board.SDA)
+    pca = adafruit_pca9685.PCA9685(i2c)
+
+    #asignamos la frecuencia del PWM
+    pca.frequency = 60
+
+def callback(data):
+    variable_x = data.position.x
+    rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
+
+    pca.channels[0].duty_cycle = variable_x
+    pca.channels[1].duty_cycle = 0
+    pca.channels[2].duty_cycle = 60000
+    pca.channels[3].duty_cycle = 0
+
+def listener():
+
+    # In ROS, nodes are uniquely named. If two nodes with the same
+    # name are launched, the previous one is kicked off. The
+    # anonymous=True flag means that rospy will choose a unique
+    # name for our 'listener' node so that multiple listeners can
+    # run simultaneously.
+    rospy.init_node('listener', anonymous=True)
+#esto es una prueba
+#oytaa
+
+    rospy.Subscriber("Datosmotor", Pose, callback)
+
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
 
 if __name__ == '__main__':
+    setup()
     try:
-        pwm()
+        listener()
     except rospy.ROSInterruptException:
+        destroy()
         pass
