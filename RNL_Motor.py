@@ -5,15 +5,14 @@ import adafruit_pca9685
 import rospy
 from geometry_msgs.msg import Pose
 
-
+i2c = busio.I2C(board.SCL, board.SDA)
+pca = adafruit_pca9685.PCA9685(i2c)
+    #asignamos la frecuencia del PWM
+pca.frequency = 60
 
 def setup():
     #inicializacion de protocoño de comunicacion I2C
-    i2c = busio.I2C(board.SCL, board.SDA)
-    pca = adafruit_pca9685.PCA9685(i2c)
 
-    #asignamos la frecuencia del PWM
-    pca.frequency = 60
 
 def callback(data):
     variable_x = data.position.x
