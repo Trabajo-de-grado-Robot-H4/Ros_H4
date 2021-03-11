@@ -10,7 +10,6 @@ pca = adafruit_pca9685.PCA9685(i2c)
     #asignamos la frecuencia del PWM
 pca.frequency = 60
 
-def setup():
     #inicializacion de protocoño de comunicacion I2C
 
 
@@ -40,7 +39,6 @@ def listener():
     rospy.spin()
 
 if __name__ == '__main__':
-    setup()
     try:
         listener()
     except rospy.ROSInterruptException:
