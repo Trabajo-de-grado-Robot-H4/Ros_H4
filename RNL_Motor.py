@@ -16,11 +16,15 @@ pca.frequency = 60
 def callback(data):
     variable_x = data.position.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
-
-    pca.channels[0].duty_cycle = int(variable_x)
+    if variable_x>0:
+    pca.channels[0].duty_cycle =abs(int(variable_x))
     pca.channels[1].duty_cycle = 0
     pca.channels[2].duty_cycle = 60000
-    pca.channels[3].duty_cycle = 0
+
+    if variable_x<0:
+    pca.channels[0].duty_cycle =abs(int(variable_x))
+    pca.channels[1].duty_cycle = 60000
+    pca.channels[2].duty_cycle = 0
 
 def listener():
 
