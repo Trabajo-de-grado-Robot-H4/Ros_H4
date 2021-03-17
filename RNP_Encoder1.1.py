@@ -6,7 +6,7 @@ from geometry_msgs.msg import Point # importamos el tipo de dato pose
 import RPi.GPIO as GPIO # libreria para comunicacion de puestos GPIO de la raspberry
 import time             # libreria para obtener el tiempo
 
-Enc=Pose() # Tipo de dato pose
+Enc=Point() # Tipo de dato point
 """ pines usados en la rapsberry"""
 RoAPin = 21
 RoBPin = 20
