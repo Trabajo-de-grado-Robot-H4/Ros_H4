@@ -3,7 +3,7 @@ import board
 import busio
 import adafruit_pca9685
 import rospy
-from geometry_msgs.msg import Pose
+from geometry_msgs.msg import Point
 
 i2c = busio.I2C(board.SCL, board.SDA)
 pca = adafruit_pca9685.PCA9685(i2c)
@@ -14,18 +14,18 @@ pca.frequency = 60
 
 
 def callback(data):
-    variable_x = data.position.x
+    variable_x = data.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
 
-    if variable_x>0:
-        pca.channels[0].duty_cycle =int(variable_x)
-        pca.channels[1].duty_cycle = 0
-        pca.channels[2].duty_cycle = 60000
+    #if variable_x>0:
+    #    pca.channels[0].duty_cycle =int(variable_x)
+    #    pca.channels[1].duty_cycle = 0
+    #    pca.channels[2].duty_cycle = 60000
 
-    if variable_x < 0:
-        pca.channels[0].duty_cycle =abs(int(variable_x))
-        pca.channels[1].duty_cycle = 60000
-        pca.channels[2].duty_cycle = 0
+    #if variable_x < 0:
+    #    pca.channels[0].duty_cycle =abs(int(variable_x))
+    #    pca.channels[1].duty_cycle = 60000
+    #    pca.channels[2].duty_cycle = 0
 
 def listener():
 
@@ -38,7 +38,7 @@ def listener():
 #esto es una prueba
 #oytaa
 
-    rospy.Subscriber("Datosmotor", Pose, callback)
+    rospy.Subscriber("Datosmotor", Point, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
