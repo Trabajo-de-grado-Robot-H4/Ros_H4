@@ -15,17 +15,7 @@ pca.frequency = 60
 
 def callback(data):
     variable_x = data.x
-    #rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
-
-    if variable_x>0:
-        pca.channels[0].duty_cycle =int(variable_x)
-        pca.channels[1].duty_cycle = 0
-        pca.channels[2].duty_cycle = 60000
-
-    if variable_x < 0:
-        pca.channels[0].duty_cycle =abs(int(variable_x))
-        pca.channels[1].duty_cycle = 60000
-        pca.channels[2].duty_cycle = 0
+    rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
 
 def listener():
 
@@ -34,7 +24,7 @@ def listener():
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
-
+    rospy.init_node('listener', anonymous=True)
 #esto es una prueba
 #oytaa
 
@@ -44,7 +34,6 @@ def listener():
     rospy.spin()
 
 if __name__ == '__main__':
-    rospy.init_node('listener', anonymous=True)
     try:
     listener()
     except rospy.ROSInterruptException:
