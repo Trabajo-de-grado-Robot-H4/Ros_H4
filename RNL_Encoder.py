@@ -17,7 +17,7 @@ def listener():
 #esto es una prueba
 #oytaa
 
-    rospy.Subscriber("Encoder", Point, callback)
+    rospy.Subscriber("Encoder1", Point, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
