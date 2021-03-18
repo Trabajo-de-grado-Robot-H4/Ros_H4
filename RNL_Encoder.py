@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import rospy
-from geometry_msgs.msg import Pose
+from geometry_msgs.msg import Point
 
 def callback(data):
-    variable_x = data.position.x
+    variable_x = data.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
 
 def listener():
@@ -17,7 +17,7 @@ def listener():
 #esto es una prueba
 #oytaa
 
-    rospy.Subscriber("Encoder", Pose, callback)
+    rospy.Subscriber("Encoder", Point, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
