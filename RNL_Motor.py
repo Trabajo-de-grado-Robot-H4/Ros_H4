@@ -35,7 +35,7 @@ def listener():
 
 if __name__ == '__main__':
     try:
-    listener()
+        listener()
     except rospy.ROSInterruptException:
         #destroy()
         pass
