@@ -34,7 +34,7 @@ def listener():
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
-    rospy.init_node('listener', anonymous=True)
+
 #esto es una prueba
 #oytaa
 
@@ -44,8 +44,9 @@ def listener():
     rospy.spin()
 
 if __name__ == '__main__':
-    #try:
-        listener()
-    #except rospy.ROSInterruptException:
+    rospy.init_node('listener', anonymous=True)
+    try:
+    listener()
+    except rospy.ROSInterruptException:
         #destroy()
-    #    pass
+        pass
