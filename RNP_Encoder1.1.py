@@ -6,7 +6,9 @@ from geometry_msgs.msg import Point # importamos el tipo de dato pose
 import RPi.GPIO as GPIO # libreria para comunicacion de puestos GPIO de la raspberry
 import time             # libreria para obtener el tiempo
 
+
 Enc=Point() # Tipo de dato point
+rospy.init_node('talker1', anonymous=True)
 """ pines usados en la rapsberry"""
 RoAPin = 21
 RoBPin = 20
@@ -57,7 +59,7 @@ def destroy():
 """ funcion que publica los datos del encoder """
 def talker():
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
-    rospy.init_node('talker1', anonymous=True)
+
     rate = rospy.Rate(1000) # 10hz
     while not rospy.is_shutdown():
 
