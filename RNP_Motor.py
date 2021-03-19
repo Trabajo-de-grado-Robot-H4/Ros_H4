@@ -16,13 +16,13 @@ def talker():
     rospy.init_node('talkerM', anonymous=True)
     rate = rospy.Rate(1000) # 10hz
     while not rospy.is_shutdown():
-        
+
 
         Vel=Input_data()
         Enc.x=Vel
         #Enc.position.y=3
         #Enc.position.z=12
-        rospy.loginfo(Enc)
+        #rospy.loginfo(Enc)
         pub.publish(Enc)
         rate.sleep()
 
