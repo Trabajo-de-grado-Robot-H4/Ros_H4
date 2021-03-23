@@ -5,7 +5,7 @@ import adafruit_pca9685
 import rospy
 from geometry_msgs.msg import Point
 
-rospy.init_node('listener', anonymous=True)
+
 
 i2c = busio.I2C(board.SCL, board.SDA)
 pca = adafruit_pca9685.PCA9685(i2c)
@@ -20,6 +20,7 @@ def callback(data):
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
 
 def listener():
+    rospy.init_node('listener', anonymous=True)
 
     # In ROS, nodes are uniquely named. If two nodes with the same
     # name are launched, the previous one is kicked off. The
@@ -29,7 +30,6 @@ def listener():
 
 #esto es una prueba
 #oytaa
-
     rospy.Subscriber("Datosmotor", Point, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
