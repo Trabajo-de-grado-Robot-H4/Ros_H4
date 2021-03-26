@@ -60,7 +60,7 @@ def destroy():
 def talker():
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
 
-    rate = rospy.Rate(10) # 10hz
+    rate = rospy.Rate(100) # 10hz
     while not rospy.is_shutdown():
 
 
