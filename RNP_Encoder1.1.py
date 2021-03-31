@@ -60,17 +60,15 @@ def destroy():
 def talker():
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
 
-    rate = rospy.Rate(1000) # 10hz
-    while not rospy.is_shutdown():
-
-
-        sensor=rotaryDeal()
-        Enc.x=sensor
+    #rate = rospy.Rate(1000) # 10hz
+    #while not rospy.is_shutdown():
+    sensor=rotaryDeal()
+    Enc.x=sensor
         #Enc.position.y=3
         #Enc.position.z=12
         #rospy.loginfo(Enc)
-        pub.publish(Enc)
-        rate.sleep()
+    pub.publish(Enc)
+    #rate.sleep()
 
 if __name__ == '__main__':
     setup()
