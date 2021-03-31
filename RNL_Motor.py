@@ -19,7 +19,7 @@ def callback(data):
     variable_x = data.x
     rospy.loginfo(rospy.get_caller_id() + 'I heard %f', variable_x)
     if variable_x>0:
-        pca.channels[0].duty_cycle = 30000
+        pca.channels[0].duty_cycle = int(variable_x)
         pca.channels[1].duty_cycle = 0
         pca.channels[2].duty_cycle = 60000
 
@@ -44,9 +44,13 @@ def listener():
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
+def destroy():
+    pca.reset()
+
+
 if __name__ == '__main__':
     try:
         listener()
     except rospy.ROSInterruptException:
-        #destroy()
+        destroy()
         pass
