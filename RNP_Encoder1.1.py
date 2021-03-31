@@ -24,6 +24,8 @@ def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN) # input mode
     GPIO.setup(RoBPin, GPIO.IN)
+    GPIO.add_event_detect(RoAPin, GPIO.RISING, callback=my_callback)
+    #GPIO.add_event_detect(RoBPin, GPIO.RISING, callback=my_callback)
 
 """ funcion que lee el encoder """
 def rotaryDeal():
@@ -35,25 +37,29 @@ def rotaryDeal():
  global count
  global statep
 
- A= GPIO.input(RoAPin)
- B= GPIO.input(RoBPin)
- if (A==1) and (B==1):
-    state=0
- if (A==1) and (B==0):
-    state=1
- if (A==0) and (B==0):
-    state=2
- if (A==0) and (B==1):
-    state=3
- index=4*state + statep
- if (count >= 1496) or (count<=-1496):
-        count=0
- count=count + QEM[index]
- statep=state
 
- grados=count*gain
- return (grados)
+
+
 """ funcion que limpia los puertos utilizados """
+
+def my_callback():
+     A= GPIO.input(RoAPin)
+     B= GPIO.input(RoBPin)
+     if (A==1) and (B==1):
+        state=0
+     if (A==1) and (B==0):
+        state=1
+     if (A==0) and (B==0):
+        state=2
+     if (A==0) and (B==1):
+        state=3
+     index=4*state + statep
+     if (count >= 1496) or (count<=-1496):
+            count=0
+     count=count + QEM[index]
+     statep=state
+     grados=count*gain
+     return (grados)
 def destroy():
         GPIO.cleanup()
 """ funcion que publica los datos del encoder """
