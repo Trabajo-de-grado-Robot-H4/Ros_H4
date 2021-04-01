@@ -25,24 +25,17 @@ def setup():
     GPIO.setup(RoAPin, GPIO.IN) # input mode
     GPIO.setup(RoBPin, GPIO.IN)
     GPIO.add_event_detect(RoAPin, GPIO.RISING, callback=my_callback)
-    #GPIO.add_event_detect(RoBPin, GPIO.RISING, callback=my_callback)
-
-""" funcion que lee el encoder """
-def rotaryDeal():
-
- global QEM
- global index
- global gain
- global grados
- global count
- global statep
-
-
-
+    GPIO.add_event_detect(RoBPin, GPIO.RISING, callback=my_callback)
 
 """ funcion que limpia los puertos utilizados """
 
-def my_callback():
+def my_callback(RoAPin,RoBPin):
+     global QEM
+     global index
+     global gain
+     global grados
+     global count
+     global statep
      A= GPIO.input(RoAPin)
      B= GPIO.input(RoBPin)
      if (A==1) and (B==1):
@@ -59,19 +52,20 @@ def my_callback():
      count=count + QEM[index]
      statep=state
      grados=count*gain
-     return (grados)
+
 def destroy():
         GPIO.cleanup()
 """ funcion que publica los datos del encoder """
 def talker():
+    global grados
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
 
-    rate = rospy.Rate(1000) # 10hz
+    rate = rospy.Rate(50) # 10hz
     while not rospy.is_shutdown():
 
 
-        sensor=rotaryDeal()
-        Enc.x=sensor
+
+        Enc.x=grados
         #Enc.position.y=3
         #Enc.position.z=12
         #rospy.loginfo(Enc)
