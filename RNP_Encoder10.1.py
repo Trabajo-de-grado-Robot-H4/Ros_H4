@@ -27,7 +27,7 @@ def setup():
     GPIO.add_event_detect(RoAPin, GPIO.RISING, callback=my_callback)
     #GPIO.add_event_detect(RoBPin, GPIO.RISING, callback=my_callback)
 
-""" funcion que lee el encoder """
+""" funcion que lee el encoder. """
 def rotaryDeal():
 
  global QEM
