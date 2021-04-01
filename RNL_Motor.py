@@ -21,11 +21,11 @@ def callback(data):
     if variable_x>0:
         pca.channels[0].duty_cycle = int(variable_x)
         pca.channels[1].duty_cycle = 0
-        pca.channels[2].duty_cycle = 60000
+        pca.channels[2].duty_cycle = 30000
 
     if variable_x<0:
         pca.channels[0].duty_cycle = abs(int(variable_x))
-        pca.channels[1].duty_cycle = 60000
+        pca.channels[1].duty_cycle = 30000
         pca.channels[2].duty_cycle = 0
 
 def listener():
