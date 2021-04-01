@@ -54,8 +54,8 @@ def my_callback():
      if (A==0) and (B==1):
         state=3
      index=4*state + statep
-     if (count >= 1496) or (count<=-1496):
-            count=0
+     #if (count >= 1496) or (count<=-1496):
+     #       count=0
      count=count + QEM[index]
      statep=state
      grados=count*gain
