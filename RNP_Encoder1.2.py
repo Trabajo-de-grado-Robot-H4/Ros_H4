@@ -58,7 +58,7 @@ def destroy():
 
 def talker():
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
-    rate = rospy.Rate(50)                                     # 50hz
+    rate = rospy.Rate(1000)                                     # 50hz
     while not rospy.is_shutdown():
         sensor=grados
         Enc.x=sensor
