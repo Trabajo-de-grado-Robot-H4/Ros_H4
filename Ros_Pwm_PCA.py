@@ -16,7 +16,11 @@ pca.frequency = 60
 
 val=int(input("Inserte pwm en el canal 0: "))
 
-pca.channels[0].duty_cycle = val
-pca.channels[1].duty_cycle = 0
-pca.channels[2].duty_cycle = 60000
-pca.channels[3].duty_cycle = 0
+if(val>=0):
+  pca.channels[0].duty_cycle = val
+  pca.channels[1].duty_cycle = 0
+  pca.channels[2].duty_cycle = 60000
+if(val<=0):
+  pca.channels[0].duty_cycle = abs(val)
+  pca.channels[1].duty_cycle = 60000
+  pca.channels[2].duty_cycle = 0
