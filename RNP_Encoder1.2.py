@@ -22,10 +22,7 @@ RoBPin = 20
 
 gain=360/(11*34)
 grados=0
-QEM=[0,-1,0,1,1,0,-1,0,0,1,0,-1,-1,0,1,0]
-index=0
 count=0
-statep=0
 
 """ SETUP """
 
@@ -58,7 +55,7 @@ def destroy():
 
 def talker():
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
-    rate = rospy.Rate(1000)                                     # 50hz
+    rate = rospy.Rate(50)                                     # 50hz
     while not rospy.is_shutdown():
         sensor=grados
         Enc.x=sensor
