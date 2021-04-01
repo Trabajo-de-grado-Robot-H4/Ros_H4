@@ -1,76 +1,71 @@
 #!/usr/bin/env python
 # license removed for brevity
-""" importar librerias necesarias """
+
+""" LIBRERÍAS """
+
 import rospy
 from geometry_msgs.msg import Point # importamos el tipo de dato pose
 import RPi.GPIO as GPIO # libreria para comunicacion de puestos GPIO de la raspberry
 import time             # libreria para obtener el tiempo
 
+""" OBJETOS """
 
 Enc=Point() # Tipo de dato point
 rospy.init_node('talker1', anonymous=True)
-""" pines usados en la rapsberry"""
+
+""" PINES ENCODER """
+
 RoAPin = 21
 RoBPin = 20
-""" variables """
-gain=360/(11*34*4)
+
+""" VARIABLES """
+
+gain=360/(11*34)
 grados=0
 QEM=[0,-1,0,1,1,0,-1,0,0,1,0,-1,-1,0,1,0]
 index=0
 count=0
 statep=0
-""" funcion setup """
+
+""" SETUP """
+
 def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN) # input mode
     GPIO.setup(RoBPin, GPIO.IN)
-    GPIO.add_event_detect(RoAPin, GPIO.RISING, callback=my_callback)
-    GPIO.add_event_detect(RoBPin, GPIO.RISING, callback=my_callback)
+    GPIO.add_event_detect(RoAPin, GPIO.BOTH, callback=callbackEncoder)
 
-""" funcion que limpia los puertos utilizados """
+""" INTERRUPCIÓN ENCODERS """
 
-def my_callback(RoAPin,RoBPin):
-     global QEM
-     global index
+def callbackEncoder(RoAPin):
      global gain
      global grados
      global count
-     global statep
-     A= GPIO.input(RoAPin)
+
      B= GPIO.input(RoBPin)
-     if (A==1) and (B==1):
-        state=0
-     if (A==1) and (B==0):
-        state=1
-     if (A==0) and (B==0):
-        state=2
-     if (A==0) and (B==1):
-        state=3
-     index=4*state + statep
-     if (count >= 1496) or (count<=-1496):
-            count=0
-     count=count + QEM[index]
-     statep=state
+     if (B==1):
+        count=count+1
+     if (B==0):
+        count=count-1
      grados=count*gain
+    
+""" LIMPIEZA PINES """        
 
 def destroy():
         GPIO.cleanup()
-""" funcion que publica los datos del encoder """
+        
+""" PUBLICADOR """
+
 def talker():
-    global grados
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
-
-    rate = rospy.Rate(50) # 10hz
+    rate = rospy.Rate(50)                                     # 50hz
     while not rospy.is_shutdown():
-
-
-
-        Enc.x=grados
-        #Enc.position.y=3
-        #Enc.position.z=12
-        #rospy.loginfo(Enc)
+        sensor=grados
+        Enc.x=sensor
         pub.publish(Enc)
         rate.sleep()
+        
+""" PRINCIPAL """
 
 if __name__ == '__main__':
     setup()
