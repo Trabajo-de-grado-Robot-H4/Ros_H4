@@ -4,14 +4,14 @@
 """ LIBRERÍAS """
 
 import rospy
-from geometry_msgs.msg import Point # importamos el tipo de dato pose
-import RPi.GPIO as GPIO # libreria para comunicacion de puestos GPIO de la raspberry
-import time             # libreria para obtener el tiempo
+from geometry_msgs.msg import Point        # DATOS POINT
+import RPi.GPIO as GPIO                    # COMUNICACIÓN GPIO
+import time                                # TIEMPO
 
 """ OBJETOS """
 
-Enc=Point() # Tipo de dato point
-rospy.init_node('talker1', anonymous=True)
+Enc=Point()                                # OBJETO POINT
+rospy.init_node('talker1', anonymous=True) # OBJETO NODO
 
 """ PINES ENCODER """
 
@@ -28,7 +28,7 @@ count=0
 
 def setup():
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(RoAPin, GPIO.IN) # input mode
+    GPIO.setup(RoAPin, GPIO.IN)
     GPIO.setup(RoBPin, GPIO.IN)
     GPIO.add_event_detect(RoAPin, GPIO.FALLING, callback=callbackEncoder)
 
