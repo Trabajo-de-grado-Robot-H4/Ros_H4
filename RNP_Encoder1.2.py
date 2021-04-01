@@ -33,7 +33,8 @@ def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN) # input mode
     GPIO.setup(RoBPin, GPIO.IN)
-    GPIO.add_event_detect(RoAPin, GPIO.BOTH, callback=callbackEncoder)
+    GPIO.add_event_detect(RoAPin, GPIO.RISING, callback=callbackEncoder)
+    GPIO.add_event_detect(RoAPin, GPIO.FALLING, callback=callbackEncoder)
 
 """ INTERRUPCIÓN ENCODERS """
 
