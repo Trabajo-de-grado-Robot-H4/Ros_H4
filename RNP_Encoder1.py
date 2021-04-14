@@ -67,6 +67,7 @@ def talker():
     while not rospy.is_shutdown():
         Enc.x=grados
         pub.publish(Enc)
+        rospy.loginfo(Enc)
         rate.sleep()
 
 """ PRINCIPAL """
