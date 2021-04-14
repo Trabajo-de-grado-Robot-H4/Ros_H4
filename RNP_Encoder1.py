@@ -6,7 +6,8 @@
 import rospy
 from geometry_msgs.msg import Point        # DATOS POINT
 import RPi.GPIO as GPIO                    # COMUNICACIÓN GPIO
-import time                                # TIEMPO
+import time
+from concurrent import futures                                # TIEMPO
 
 """ OBJETOS """
 
@@ -54,7 +55,14 @@ def destroy():
 """ PUBLICADOR """
 
 def talker():
-    pub = rospy.Publisher('Encoder1', Point, queue_size=1000)
+
+    """ ejecutando en otro hilo """
+    global grados
+    executor = futures.ThreadPoolExecutor(max_workers=1)
+    a = executor.submit(setup)
+
+    """ ejecutando publisher """
+    pub = rospy.Publisher('Encoder1', Point, queue_size=10)
     rate = rospy.Rate(50)                                     # 50hz
     while not rospy.is_shutdown():
         Enc.x=grados
