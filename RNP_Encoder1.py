@@ -1,73 +1,67 @@
 #!/usr/bin/env python
 # license removed for brevity
-""" importar librerias necesarias """
-import rospy
-from geometry_msgs.msg import Point # importamos el tipo de dato pose
-import RPi.GPIO as GPIO # libreria para comunicacion de puestos GPIO de la raspberry
-import time             # libreria para obtener el tiempo
 
-Enc=Point() # Tipo de dato pose
-""" pines usados en la rapsberry"""
+""" LIBRERÍAS """
+
+import rospy
+from geometry_msgs.msg import Point        # DATOS POINT
+import RPi.GPIO as GPIO                    # COMUNICACIÓN GPIO
+import time                                # TIEMPO
+
+""" OBJETOS """
+
+Enc=Point()                                # OBJETO POINT
+rospy.init_node('talker1', anonymous=True) # OBJETO NODO
+
+""" PINES ENCODER """
+
 RoAPin = 21
 RoBPin = 20
-""" variables """
-globalCounter = 0.0
-gain=0.97593582887
-flag = 0
-Last_RoB_Status = 0.0
-Current_RoB_Status = 0.0
-grados=0.0
 
-""" funcion setup """
+""" VARIABLES """
+
+gain=360/(11*34)
+grados=0
+count=0
+
+""" SETUP """
+
 def setup():
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(RoAPin, GPIO.IN) # input mode
+    GPIO.setup(RoAPin, GPIO.IN)
     GPIO.setup(RoBPin, GPIO.IN)
+    GPIO.add_event_detect(RoAPin, GPIO.FALLING, callback=callbackEncoder)
 
-""" funcion que lee el encoder """
-def rotaryDeal():
- global flag
- global Last_RoB_Status
- global Current_RoB_Status
- global globalCounter
- global gain
- global grados
+""" INTERRUPCIÓN ENCODERS """
 
- Last_RoB_Status = GPIO.input(RoBPin)
- while(not GPIO.input(RoAPin)):
-   Current_RoB_Status = GPIO.input(RoBPin)
-   flag = 1
+def callbackEncoder(RoAPin):
+     global gain
+     global grados
+     global count
 
- if flag == 1:
-      flag = 0
-      if (Last_RoB_Status == 0) and (Current_RoB_Status == 1):
-         globalCounter = globalCounter + 1.0
-         #print ('globalCounter =')
-         #print ("{0:.3f}".format(globalCounter*gain))
-      if (Last_RoB_Status == 1) and (Current_RoB_Status == 0):
-         globalCounter = globalCounter - 1.0
-         #print ('globalCounter =')
-         #print ("{0:.3f}".format(globalCounter*gain))
- grados=globalCounter*gain
- return (grados)
-""" funcion que limpia los purtos utilizados """
+     B= GPIO.input(RoBPin)
+     if (B==1):
+        count=count+1
+     if (B==0):
+        count=count-1
+     grados=count*gain
+
+""" LIMPIEZA PINES """
+
 def destroy():
         GPIO.cleanup()
-""" funcion que publica los datos del encoder """
+
+""" PUBLICADOR """
+
 def talker():
-    pub = rospy.Publisher('Encoder1', Point, queue_size=10)
-    rospy.init_node('talker1', anonymous=True)
-    rate = rospy.Rate(100) # 10hz
+    pub = rospy.Publisher('Encoder1', Point, queue_size=1000)
+    rate = rospy.Rate(50)                                     # 50hz
     while not rospy.is_shutdown():
-
-
-        sensor=rotaryDeal()
-        Enc.x=sensor
-        #Enc.position.y=3
-        #Enc.position.z=12
-        rospy.loginfo(Enc)
+        Enc.x=grados
         pub.publish(Enc)
         rate.sleep()
+
+""" PRINCIPAL """
 
 if __name__ == '__main__':
     setup()
