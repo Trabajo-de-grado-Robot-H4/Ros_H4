@@ -69,6 +69,7 @@ def talker():
         pub.publish(Enc)
         #rospy.loginfo(Enc)
         rate.sleep()
+        
 
 """ PRINCIPAL """
 
