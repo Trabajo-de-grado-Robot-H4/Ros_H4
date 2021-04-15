@@ -28,6 +28,9 @@ count=0
 """ SETUP """
 
 def setup():
+    
+    executor = futures.ThreadPoolExecutor(max_workers=1)
+    a = executor.submit(talker)    
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN)
     GPIO.setup(RoBPin, GPIO.IN)
@@ -58,8 +61,6 @@ def talker():
 
     """ ejecutando en otro hilo """
     global grados
-    executor = futures.ThreadPoolExecutor(max_workers=1)
-    a = executor.submit(setup)
 
     """ ejecutando publisher """
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
