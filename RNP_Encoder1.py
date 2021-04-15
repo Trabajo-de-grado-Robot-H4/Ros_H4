@@ -7,7 +7,6 @@ import rospy
 from geometry_msgs.msg import Point        # DATOS POINT
 import RPi.GPIO as GPIO                    # COMUNICACIÓN GPIO
 import time
-import keyboard
 from concurrent import futures                                # TIEMPO
 
 """ OBJETOS """
@@ -34,9 +33,6 @@ def setup():
     GPIO.setup(RoAPin, GPIO.IN)
     GPIO.setup(RoBPin, GPIO.IN)
     GPIO.add_event_detect(RoAPin, GPIO.FALLING, callback=callbackEncoder)
-    if keyboard.is_pressed('c'):
-            print('se presionó [p]arar!')
-            break
 
 """ INTERRUPCIÓN ENCODERS """
 
