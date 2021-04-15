@@ -28,9 +28,6 @@ count=0
 """ SETUP """
 
 def setup():
-    
-    executor = futures.ThreadPoolExecutor(max_workers=1)
-    a = executor.submit(talker)    
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN)
     GPIO.setup(RoBPin, GPIO.IN)
@@ -70,14 +67,17 @@ def talker():
         pub.publish(Enc)
         #rospy.loginfo(Enc)
         rate.sleep()
-        
+def main():
+  executor = futures.ThreadPoolExecutor(max_workers=2)
+      a = executor.submit(setup)
+      b = executor.submit(talker)
 
 """ PRINCIPAL """
 
 if __name__ == '__main__':
     setup()
     try:
-        talker()
+        main()
     except rospy.ROSInterruptException:
         destroy()
         pass
