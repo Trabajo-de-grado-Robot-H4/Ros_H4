@@ -31,7 +31,7 @@ def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN)
     GPIO.setup(RoBPin, GPIO.IN)
-    GPIO.add_event_detect(RoAPin, GPIO.BOTH, callback=callbackEncoder)
+    GPIO.add_event_detect(RoAPin, GPIO.FALLING, callback=callbackEncoder)
 
 """ INTERRUPCIÓN ENCODERS """
 
@@ -63,7 +63,7 @@ def talker():
 
     """ ejecutando publisher """
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
-    rate = rospy.Rate(50)                                     # 50hz
+    rate = rospy.Rate(20)                                     # 50hz
     while not rospy.is_shutdown():
         Enc.x=grados
         pub.publish(Enc)
