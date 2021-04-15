@@ -28,7 +28,6 @@ count=0
 """ SETUP """
 
 def setup():
-  while True:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(RoAPin, GPIO.IN)
     GPIO.setup(RoBPin, GPIO.IN)
