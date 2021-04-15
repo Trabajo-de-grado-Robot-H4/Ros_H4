@@ -64,7 +64,7 @@ def talker():
 
     """ ejecutando publisher """
     pub = rospy.Publisher('Encoder1', Point, queue_size=10)
-    rate = rospy.Rate(10)                                     # 50hz
+    rate = rospy.Rate(50)                                     # 50hz
     while not rospy.is_shutdown():
         Enc.x=grados
         pub.publish(Enc)
