@@ -68,9 +68,9 @@ def talker():
         #rospy.loginfo(Enc)
         rate.sleep()
 def main():
-  executor = futures.ThreadPoolExecutor(max_workers=2)
-      a = executor.submit(setup)
-      b = executor.submit(talker)
+    executor = futures.ThreadPoolExecutor(max_workers=2)
+    a = executor.submit(setup)
+    b = executor.submit(talker)
 
 """ PRINCIPAL """
 
