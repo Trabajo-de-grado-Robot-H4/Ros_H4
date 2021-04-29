@@ -27,6 +27,6 @@ def readLong():
 
 
 while True:
-    time.sleep(1)
+    
     number = readLong()
     print("[Arduino]", number, "mm")
