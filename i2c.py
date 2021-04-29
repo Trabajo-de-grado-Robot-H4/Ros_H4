@@ -13,7 +13,7 @@ address = 0x04
 def readLong():
    #number = bus.read_byte(address)
    number=""
-   for i in xrange(4):
+   for i in range(4):
       number += chr(bus.read_byte(address))
    return struct.unpack('l', number)
 
