@@ -2,6 +2,7 @@
 import smbus
 import time
 import struct
+import RPi.GPIO as GPIO
 
 # objeto clase smbus para i2c
 bus = smbus.SMBus(1)
