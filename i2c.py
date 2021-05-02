@@ -9,6 +9,11 @@ bus = smbus.SMBus(1)
 # Direccion del i2c arduino esclavo
 address = 0x04
 
+
+def readLong():
+   block = bus.read_i2c_block_data(address, 0,20)
+   return struct.unpack('f', block)[0]
+'''
 def readLong():
    block = bus.read_i2c_block_data(address, 1)
    number=""
@@ -16,7 +21,7 @@ def readLong():
       number= number+chr(block[i])
       print(number)
    return number
-
+'''
 while True:
 
     number = readLong()
