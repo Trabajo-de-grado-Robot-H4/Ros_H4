@@ -15,7 +15,6 @@ def readLong():
    number=""
    for i in range(20):
       number= number+chr(block[i])
-   print(block)
    return number# struct.unpack('<l', number.encode('utf-8'))[0]
    #return struct.unpack('f', number)
    #for i in range(20):
@@ -35,4 +34,4 @@ while True:
 
     number = readLong()
     print("[Arduino]", number, "mm")
-    time.sleep(1)
+    time.sleep(0.01)
