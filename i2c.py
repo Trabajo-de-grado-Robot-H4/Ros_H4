@@ -5,7 +5,7 @@ import struct
 import RPi.GPIO as GPIO
 
 # objeto clase smbus para i2c
-bus = smbus.SMBus(1)
+bus = smbus.SMBus(4)
 # Direccion del i2c arduino esclavo
 address = 0x04
 
