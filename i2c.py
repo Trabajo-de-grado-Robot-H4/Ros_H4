@@ -29,4 +29,4 @@ while True:
 
     number = readLong()
     print("[Arduino]", number, "mm")
-    #time.sleep(0.1)
+    time.sleep(0.1)
