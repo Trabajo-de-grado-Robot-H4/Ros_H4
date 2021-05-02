@@ -13,6 +13,7 @@ def readLong():
    block = bus.read_i2c_block_data(address, 1)
    #number = bus.read_byte(address)
    number=""
+   print(number)
    for i in range(20):
       number=number+chr(block[i])
       print(number)
