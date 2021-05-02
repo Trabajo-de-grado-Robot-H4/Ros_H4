@@ -5,7 +5,7 @@ import struct
 import RPi.GPIO as GPIO
 
 # objeto clase smbus para i2c
-bus = smbus.SMBus(4)
+bus = smbus.SMBus(1)
 # Direccion del i2c arduino esclavo
 address = 0x04
 
@@ -14,7 +14,7 @@ def readLong():
    #number = bus.read_byte(address)
    number=""
    for i in range(4):
-      number += chr(bus.read_byte(address))
+      number += bus.read_byte(address))
       time.sleep(0.001)
       print(number)
    #return struct.unpack('f', number)
