@@ -11,12 +11,14 @@ address = 0x04
 
 
 def readLong():
-   block = bus.read_i2c_block_data(address, 0,20)
-   return block#struct.unpack('f', block)[0]
+   block = bus.read_i2c_block_data(address, 0,10)
+   for i in range(10)
+      number=number+chr(block[i])
+   return number#struct.unpack('f', block)[0]
 
 
 while True:
 
     number = readLong()
     print(number)
-    time.sleep(0.1)
+    #time.sleep(0.1)
