@@ -29,4 +29,4 @@ while True:
 
     number = readLong()
     print(number)
-    #time.sleep(0.1)
+    time.sleep(0.1)
