@@ -8,6 +8,7 @@ import RPi.GPIO as GPIO
 bus = smbus.SMBus(1)
 # Direccion del i2c arduino esclavo
 address = 0x04
+number=''
 
 
 def readLong():
