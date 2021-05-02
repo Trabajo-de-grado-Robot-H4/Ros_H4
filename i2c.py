@@ -16,7 +16,7 @@ def readLong():
    for i in range(10):
       number= number+chr(block[i])
       time.sleep(0.02)
-   print(read_word_data(address))
+   print(bus.read_word_data(address))
    return number
 
 
