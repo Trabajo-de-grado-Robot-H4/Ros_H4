@@ -8,11 +8,11 @@ import RPi.GPIO as GPIO
 bus = smbus.SMBus(1)
 # Direccion del i2c arduino esclavo
 address = 0x04
-number=''
 
 
 def readLong():
    block = bus.read_i2c_block_data(address, 0,10)
+   number=""
    for i in range(10):
       number=number+chr(block[i])
    return number#struct.unpack('f', block)[0]
