@@ -16,7 +16,7 @@ def readLong():
    for i in range(4):
       number += chr(bus.read_byte(address))
       #time.sleep(0.001)
-      print(chr(bus.read_byte(address)))
+      print(bus.read_i2c_block_data(address, 1))
    return struct.unpack('<l', number.encode('utf-8'))[0]
    #return struct.unpack('f', number)
    #for i in range(20):
