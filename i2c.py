@@ -14,7 +14,7 @@ def readLong():
    number=""
    for i in xrange(4):
       number += chr(bus.read_byte(address))
-   return struct.unpack('l', number)
+   return struct.unpack('f', number)
    #for i in range(20):
    #   number += chr(bus.read_block_data(address,1))
    #return number#struct.unpack('l', number)
@@ -32,4 +32,4 @@ while True:
 
     number = readLong()
     print("[Arduino]", number, "mm")
-    time.sleep(0.5)
+    time.sleep(1)
