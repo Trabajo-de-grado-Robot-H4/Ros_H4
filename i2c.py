@@ -14,7 +14,7 @@ def readLong():
    number=""
    for i in range(20):
       number += chr(bus.read_byte(address))
-   return struct.unpack('l', number)
+   return number#struct.unpack('l', number)
 
 
 '''
