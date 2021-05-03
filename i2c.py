@@ -11,7 +11,7 @@ address = 0x04
 
 
 def readLong():
-   bytes = bus.read_i2c_block_data(address, 0,10)
+   block = bus.read_i2c_block_data(address, 0,10)
    number=""
    for i in range(10):
      number=number+chr(block[i])
