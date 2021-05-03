@@ -1,5 +1,5 @@
 
-import smbus
+from smbus2 import SMBus
 import time
 import struct
 import RPi.GPIO as GPIO
