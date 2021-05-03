@@ -15,7 +15,7 @@ def readLong():
    number=""
    for i in range(10):
      number=number+chr(block[i])
-   return block
+   return float(number)
 
 
 while True:
