@@ -15,11 +15,11 @@ def readLong():
    #number=""
    #for i in range(10):
      # number=number+chr(block[i])
-   return struct.unpack('f', chr(block[0,0]))[0]
+   return block#struct.unpack('f', chr(block[0,0]))[0]
 
 
 while True:
 
     number = readLong()
     print(number)
-    time.sleep(0.05)
+    time.sleep(1)
