@@ -15,7 +15,7 @@ def readLong():
    #number=""
    #for i in range(10):
      # number=number+chr(block[i])
-   return block[0:10]#struct.unpack('f', chr(block[0,0]))[0]
+   return struct.unpack('f', b"".join(map(chr, bytes[0;10])))[0]
 
 
 while True:
